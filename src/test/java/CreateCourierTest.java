@@ -20,7 +20,7 @@ public class CreateCourierTest {
 
     @Test
     public void createCourierTest() {
-        Courier courier= createRandomCourier();
+        Courier courier = createRandomCourier();
 
         given()
                 .header("Content-type", "application/json")
@@ -96,6 +96,4 @@ public class CreateCourierTest {
                 .statusCode(error.getHttpCode())
                 .body("message", equalTo(error.getMessage()));
     }
-
-
 }
