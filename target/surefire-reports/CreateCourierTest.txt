@@ -1,0 +1,27 @@
+-------------------------------------------------------------------------------
+Test set: CreateCourierTest
+-------------------------------------------------------------------------------
+Tests run: 9, Failures: 3, Errors: 0, Skipped: 0, Time elapsed: 64.177 s <<< FAILURE! - in CreateCourierTest
+createDuplicateLoginTest(CreateCourierTest)  Time elapsed: 0.284 s  <<< FAILURE!
+java.lang.AssertionError: 
+1 expectation failed.
+JSON path message doesn't match.
+Expected: Этот логин уже используется
+  Actual: Этот логин уже используется. Попробуйте другой.
+
+	at CreateCourierTest.createDuplicateLoginTest(CreateCourierTest.java:62)
+
+loginWithoutPassword(CreateCourierTest)  Time elapsed: 60.221 s  <<< FAILURE!
+java.lang.AssertionError: 
+1 expectation failed.
+Expected status code <400> but was <504>.
+
+	at CreateCourierTest.loginWithoutPassword(CreateCourierTest.java:145)
+
+loginCourierTest(CreateCourierTest)  Time elapsed: 0.395 s  <<< FAILURE!
+java.lang.AssertionError: 
+1 expectation failed.
+Expected status code <200> but was <404>.
+
+	at CreateCourierTest.tearDown(CreateCourierTest.java:30)
+
