@@ -1,5 +1,4 @@
-import io.restassured.RestAssured;
-import io.restassured.mapper.ObjectMapperType;
+import client.OrderClient;
 import model.OrderColor;
 import model.OrderCreateDto;
 import org.junit.Before;
@@ -10,16 +9,15 @@ import org.junit.runners.Parameterized;
 import java.util.ArrayList;
 import java.util.List;
 
-import static io.restassured.RestAssured.given;
-import static org.apache.commons.lang3.RandomStringUtils.random;
-import static org.apache.commons.lang3.RandomUtils.nextInt;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
+import static utils.OrderGenerator.createRandomOrderDto;
 
 @RunWith(Parameterized.class)
 public class CreateOrderParametrizedTest {
 
-    OrderColor orderColor;
+    private OrderColor orderColor;
+    private OrderClient orderClient;
 
     public CreateOrderParametrizedTest(OrderColor orderColor) {
         this.orderColor = orderColor;
@@ -34,21 +32,9 @@ public class CreateOrderParametrizedTest {
         };
     }
 
-    private static OrderCreateDto createRandomOrderDto() {
-        return new OrderCreateDto()
-                .firstName(random(10))
-                .lastName(random(10))
-                .address(random(10))
-                .metroStation(random(10))
-                .phone("+" + random(11, false, true))
-                .rentTime(nextInt())
-                .deliveryDate("2020-09-1")
-                .comment(random(12));
-    }
-
     @Before
     public void setUp() {
-        RestAssured.baseURI = "http://qa-scooter.praktikum-services.ru";
+        orderClient = new OrderClient();
     }
 
     @Test
@@ -58,12 +44,7 @@ public class CreateOrderParametrizedTest {
         colors.add(orderColor);
         orderCreateDto.color(colors);
 
-        given()
-                .header("Content-type", "application/json")
-                .and()
-                .body(orderCreateDto, ObjectMapperType.GSON)
-                .when()
-                .post("/api/v1/orders")
+        orderClient.create(orderCreateDto)
                 .then()
                 .statusCode(201)
                 .and()

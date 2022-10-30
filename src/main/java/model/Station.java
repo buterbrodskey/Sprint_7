@@ -5,7 +5,8 @@ public class Station {
     private String number;
     private String color;
 
-    public Station() {}
+    public Station() {
+    }
 
     public Station(String name, String number, String color) {
         this.name = name;

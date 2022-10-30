@@ -1,44 +1,45 @@
-import io.restassured.RestAssured;
-import io.restassured.mapper.ObjectMapperType;
+import client.OrderClient;
+import model.OrderColor;
 import model.OrderCreateDto;
 import org.junit.Before;
 import org.junit.Test;
 
-import static io.restassured.RestAssured.given;
-import static org.apache.commons.lang3.RandomStringUtils.random;
-import static org.apache.commons.lang3.RandomUtils.nextInt;
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
+import static utils.OrderGenerator.createRandomOrderDto;
 
 public class CreateOrderTest {
 
-    private static OrderCreateDto createRandomOrderDto() {
-        return new OrderCreateDto()
-                .firstName(random(10))
-                .lastName(random(10))
-                .address(random(10))
-                .metroStation(random(10))
-                .phone("+" + random(11, false, true))
-                .rentTime(nextInt())
-                .deliveryDate("2020-09-1")
-                .comment(random(12));
-    }
+    private OrderClient orderClient;
 
     @Before
     public void setUp() {
-        RestAssured.baseURI = "http://qa-scooter.praktikum-services.ru";
+        orderClient = new OrderClient();
     }
 
     @Test
     public void createOrderWithOnlyRequiredFieldTest() {
         OrderCreateDto orderCreateDto = createRandomOrderDto();
 
-        given()
-                .header("Content-type", "application/json")
+        orderClient.create(orderCreateDto)
+                .then()
+                .statusCode(201)
                 .and()
-                .body(orderCreateDto, ObjectMapperType.GSON)
-                .when()
-                .post("/api/v1/orders")
+                .body("track", is(notNullValue()));
+    }
+
+    @Test
+    public void createOrderWithTwoColors() {
+        OrderCreateDto orderCreateDto = createRandomOrderDto();
+        List<OrderColor> colors = new ArrayList<>();
+        colors.add(OrderColor.GREY);
+        colors.add(OrderColor.BLACK);
+        orderCreateDto.color(colors);
+
+        orderClient.create(orderCreateDto)
                 .then()
                 .statusCode(201)
                 .and()

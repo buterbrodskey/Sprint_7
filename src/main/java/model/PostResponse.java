@@ -3,7 +3,8 @@ package model;
 public class PostResponse {
     private int id;
 
-    public PostResponse() {}
+    public PostResponse() {
+    }
 
     public int getId() {
         return id;

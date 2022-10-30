@@ -1,3 +1,4 @@
+import client.OrderClient;
 import io.restassured.RestAssured;
 import io.restassured.mapper.ObjectMapperType;
 import io.restassured.response.Response;
@@ -7,24 +8,23 @@ import org.junit.Test;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.empty;
-import static org.hamcrest.Matchers.not;
+import static org.hamcrest.Matchers.*;
 
 public class OrderListTest {
 
+    private OrderClient orderClient;
     @Before
     public void setUp() {
-        RestAssured.baseURI = "http://qa-scooter.praktikum-services.ru";
+        orderClient = new OrderClient();
     }
 
     @Test
     public void getAllOrdersTest() {
-        Response response = given()
-                .get("api/v1/orders");
-        OrderList orders = response.getBody().as(OrderList.class, ObjectMapperType.GSON);
+        Response response = orderClient.getAll();
         response.then()
-                .statusCode(200);
+                .statusCode(200)
+                .body("orders", notNullValue());
+        OrderList orders = response.getBody().as(OrderList.class, ObjectMapperType.GSON);
         assertThat(orders.getOrders(), not(empty()));
-        assertThat(orders.getAvailableStations(), not(empty()));
     }
 }

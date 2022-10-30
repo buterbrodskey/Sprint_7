@@ -12,7 +12,8 @@ public class OrderList {
     private List<Station> availableStations;
     private List<OrderDto> orders;
 
-    public OrderList() {}
+    public OrderList() {
+    }
 
     public OrderList(PageInfo pageInfo, List<Station> availableStations, List<OrderDto> orders) {
         this.pageInfo = pageInfo;
