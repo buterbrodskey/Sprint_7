@@ -1,0 +1,32 @@
+# Created at 2022-10-30T19:44:45.117
+Unexpected IOException: 8,1,LoginCourierTest,loginWithoutPassword(LoginCourierTest),null,1 expectation failed.\000AExpected status code <400> but was <504>.\000A,null,1 expectation failed.\000AExpected status code <400> but was <504>.\000A,LoginCourierTest.loginWithoutPassword:83 1 expectation failed.\000AExpected status code <400> but was <504>.\000A,java.lang.AssertionError: \000A1 expectation failed.\000AExpected status code <400> but was <504>.\000A\000A\0009at LoginCourierTest.loginWithoutPassword(LoginCourierTest.java:83)\000A
+
+
+# Created at 2022-10-30T19:44:45.118
+Unexpected IOException: 5,1,LoginCourierTest,loginWithNonExistLogin(LoginCourierTest),null,null,null
+
+
+# Created at 2022-10-30T19:44:45.403
+Unexpected IOException: 6,1,LoginCourierTest,loginWithNonExistLogin(LoginCourierTest),null,null,null
+
+
+# Created at 2022-10-30T19:44:45.404
+Unexpected IOException: 5,1,LoginCourierTest,loginWithNonExistPassword(LoginCourierTest),null,null,null
+
+
+# Created at 2022-10-30T19:44:45.608
+Unexpected IOException: 6,1,LoginCourierTest,loginWithNonExistPassword(LoginCourierTest),null,null,null
+
+
+# Created at 2022-10-30T19:44:45.608
+Unexpected IOException: 5,1,LoginCourierTest,loginCourierTest(LoginCourierTest),null,null,null
+
+
+# Created at 2022-10-30T19:44:45.865
+Unexpected IOException: 8,1,LoginCourierTest,loginCourierTest(LoginCourierTest),null,1 expectation failed.\000AExpected status code <200> but was <404>.\000A,null,1 expectation failed.\000AExpected status code <200> but was <404>.\000A,LoginCourierTest.loginCourierTest:42 1 expectation failed.\000AExpected status code <200> but was <404>.\000A,java.lang.AssertionError: \000A1 expectation failed.\000AExpected status code <200> but was <404>.\000A\000A\0009at LoginCourierTest.loginCourierTest(LoginCourierTest.java:42)\000A
+
+
+# Created at 2022-10-30T19:44:45.865
+Unexpected IOException: 2,1,org.apache.maven.surefire.junit4.JUnit4Provider,LoginCourierTest,null,null,null
+
+
